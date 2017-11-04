@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Setores</title>
+</head>
+<body>
+<h1>SISHosp</h1>
+<h2>Lista de setores</h2>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<a href="{% url 'novo_setor' %}">Cadastrar setor</a>
+<a href="{% url 'novo_funcionario' %}">Cadastrar funcionário</a>
+
+    <ul>
+    {% for setor in setores %}
+        <li>
+            {{ setor.nome }} -
+            {% for funcionario in setor.funcionario_set.all %}
+                {{ funcionario.nome }}{% if not forloop.last %}, {% else %}.{% endif %}
+            {% endfor %}
+        </li>
+
+    {% endfor %}
+    </ul>
+</body>
+</html>
